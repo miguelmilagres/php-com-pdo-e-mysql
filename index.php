@@ -48,23 +48,21 @@ try {
     // método exec
     // $result = $connection->exec($query);
 
-    $query = 'select * from tb_users';
+    // $query = 'select * from tb_users where id = 1';
+    $query = 'select * from tb_users order by name asc limit 1';
 
     $stmt = $connection->query($query);
     // $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
     // $list = $stmt->fetchAll(PDO::FETCH_NUM);
     // $list = $stmt->fetchAll(PDO::FETCH_BOTH);
-    $list = $stmt->fetchAll(PDO::FETCH_OBJ);
+    // $list = $stmt->fetchAll(PDO::FETCH_OBJ);
+    $user = $stmt->fetch(PDO::FETCH_OBJ);
 
-    $dadName = explode(' ', $list[0]->name)[0];
-    $sonName = explode(' ', $list[1]->name)[0];
-    $sisterName = explode(' ', $list[2]->name)[0];
+    // echo "<pre>";
+    // print_r($list);
+    // echo "</pre>";
 
-    echo "<pre>";
-    print_r($list);
-    echo "</pre>";
-
-    echo 'Meu nome é ' . $sonName . ', sou filho do ' . $dadName . ' e irmão da ' . $sisterName . '.';
+    echo $user->name;
 
 } catch (PDOException $e) {
     echo "Error " . $e->getCode() . ": " . $e->getMessage();
