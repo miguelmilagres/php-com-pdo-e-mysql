@@ -49,20 +49,28 @@ try {
     // $result = $connection->exec($query);
 
     // $query = 'select * from tb_users where id = 1';
-    $query = 'select * from tb_users order by name asc limit 1';
+    // $query = 'select * from tb_users order by name asc limit 1';
+    $query = 'select * from tb_users';
 
     $stmt = $connection->query($query);
     // $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
     // $list = $stmt->fetchAll(PDO::FETCH_NUM);
     // $list = $stmt->fetchAll(PDO::FETCH_BOTH);
     // $list = $stmt->fetchAll(PDO::FETCH_OBJ);
-    $user = $stmt->fetch(PDO::FETCH_OBJ);
+    // $user = $stmt->fetch(PDO::FETCH_OBJ);
+    $userList = $stmt->fetchAll(PDO::FETCH_OBJ);
 
     // echo "<pre>";
     // print_r($list);
     // echo "</pre>";
 
-    echo $user->name;
+    // echo $user->name;
+
+    $i = 0;
+    foreach ($userList as $key => $value) {
+        echo $i . ' - Name : ' . $value->name . '<br>';
+        $i++;
+    }
 
 } catch (PDOException $e) {
     echo "Error " . $e->getCode() . ": " . $e->getMessage();
